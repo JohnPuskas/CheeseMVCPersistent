@@ -20,7 +20,7 @@ namespace CheeseMVC.Controllers
     
         public IActionResult Index()
         {
-            List<CheeseCategory> categories = context.Categories.ToList();
+            IList<CheeseCategory> categories = context.Categories.ToList();
 
             return View(categories);
         }
@@ -45,7 +45,7 @@ namespace CheeseMVC.Controllers
                 context.Categories.Add(newCategory);
                 context.SaveChanges();
 
-                return Redirect("/Category");
+                return Redirect("/");
             }
 
             return View(addCategoryViewModel);
