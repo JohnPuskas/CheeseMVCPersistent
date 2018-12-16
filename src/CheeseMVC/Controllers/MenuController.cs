@@ -89,7 +89,7 @@ namespace CheeseMVC.Controllers
         [HttpPost]
         public IActionResult AddItem(AddMenuItemViewModel addMenuItemViewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)  // <-- Seems to be false
             {
                 var cheeseID = addMenuItemViewModel.CheeseID;
                 var menuID = addMenuItemViewModel.MenuID;
@@ -102,17 +102,17 @@ namespace CheeseMVC.Controllers
                 {
                     CheeseMenu menuItem = new CheeseMenu
                     {
-                        //Cheese = context.Cheeses.Single(c => c.ID == cheeseID),
-                        //Menu = context.Menus.Single(m => m.ID == menuID)
-                        CheeseID = cheeseID,
-                        MenuID = menuID
+                        Cheese = context.Cheeses.Single(c => c.ID == cheeseID),
+                        Menu = context.Menus.Single(m => m.ID == menuID)
+                        //CheeseID = cheeseID,
+                        //MenuID = menuID
                     };
 
                     context.CheeseMenus.Add(menuItem);
                     context.SaveChanges();
                 }
 
-                return Redirect(string.Format("/Menu/ViewMenu/{0}", menuID));
+                return Redirect(string.Format("/Menu/ViewMenu/{0}", addMenuItemViewModel.MenuID));
             }
 
 
